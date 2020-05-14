@@ -3,12 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Product_Schema  =  mongoose.Schema({
-
-    productid : {
-        type :String,
-        required : true,
-        unique :true,
-        trim :true
+    
+    productid :{
+         type : String,
+         required :true,
+         unique: true
     },
     description : {
         type : String,
@@ -30,6 +29,10 @@ const Product_Schema  =  mongoose.Schema({
     quantity :{
         type : Number,
         required :true
+    },
+    discount : {
+       type : Number,
+       required :true
     },
     image :{
         type: String,
