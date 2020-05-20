@@ -35,7 +35,9 @@ router.route('/:id').get((req,res)=>{
 const categoryController = require('../controllers/Category');
 
 
-router.get('/findCategory/:Category_ID',categoryController.findCategory);
+router.get('/findCategory/:MainCategory/:Admin',categoryController.findCategory);
+
+router.get('/findCategorybyname/:MainCategory/:CategoryName',categoryController.findCategoryByName);
 
 router.post('/addCategory',categoryController.SaveCategory);
 

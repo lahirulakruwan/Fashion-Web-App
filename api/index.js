@@ -1,6 +1,11 @@
 const Category = require('./routes/Category');
 const StoreManager = require('./routes/StoreManager');
-const User = require('./routes/User');
+const User = require('./routes/user');
+const StoreManagerID = require('./routes/storemanagerID');
+const CategoryID = require('./routes/CategoryID');
+
+const Comments = require('./routes/Comments');
+
 
 const conn = require('./db/connection')
 const bodyParser = require('body-parser')
@@ -55,8 +60,11 @@ const ProductRouter = require('./routes/Products');
 
 // //User section
 app.use('/user',User);
+app.use('/Comments',Comments);
 // //
+app.use('/smid',StoreManagerID);
 
+app.use('/categoryID',CategoryID);
 
 
 //Server connection

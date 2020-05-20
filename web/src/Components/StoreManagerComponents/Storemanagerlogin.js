@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import './StoreLoginRegister.css';
+import './css/StoreLoginRegister.css';
 import back from './shopping.gif'
-import logo from './logo.gif'
+import logo from './images/logo.gif'
+import Header from '../CommonComponents/header'
 import  { Redirect } from 'react-router-dom'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import swal from 'sweetalert';
 const axios = require('axios');
 
 export default class header extends Component{
@@ -21,17 +24,7 @@ export default class header extends Component{
         }
     }
 
-    // componentDidMount(){
-    //     axios.get('http://localhost:5000/user/find')
-    //     .then(response=>{
-    //       if(response.data.length>0){
-    //         this.setState({
-    //             users :  response.data.map(users=>users),
-    //         //   subcategory : response.data[0].CategoryName
-    //      })
-    //       }
-    //     })
-    // }
+
 
     handleStoreManagerUsernameChange = event => {
         this.setState({
@@ -48,45 +41,48 @@ export default class header extends Component{
     handleLoginSubmit = event => {
         event.preventDefault();
         this.getStoremanager();
-        // if(this.state.user.length != 1){
-        //     alert("invalid");
-        // } else{
-            // this.setState({
-            //     user: this.state.users.filter(users => users.username === this.state.username).map(users => users)
-            // })
-            
-            // console.log(this.state.user)
-            // console.log(this.state.users)
-            
-        // }
-        
+
     }
 
     async getStoremanager(){
         console.log(this.state.storemanagerusername)
-        axios.get('http://localhost:5000/storemanager/findstoreManager/'+this.state.storemanagerusername)
+        axios.get('http://localhost:5000/storemanager/storemanager/'+this.state.storemanagerusername)
         .then(response=>{
 
             console.log(response.data.length)
             console.log('res',response.data[0])
             if(response.data.length != 1){
-                alert("Please Ragister");
-                this.setState({register: true});
+                alert("Please Register");
+
             }
 
             this.setState({
                 storemanager: response.data[0]
             },()=>{
-                console.log('password',this.state.storemanagerpassword)
-                console.log('storenamager password',this.state.storemanager.Password)
-                console.log('storenamager username',this.state.storemanager.Username)
-                console.log('storemanager id',this.state.storemanager.smId)
-                if(this.state.storemanagerpassword == this.state.storemanager.Password){
+
+                    
+              //  console.log('storemanager',this.state.storemanager)
+              //  console.log('password',this.state.storemanagerpassword)
+              //  console.log('storenamager password',this.state.storemanager.Password)
+              //  console.log('storenamager username',this.state.storemanager.UserName)
+              //  console.log('storemanager id',this.state.storemanager.smId)
+                if(this.state.storemanagerusername === "Vishaka" && this.state.storemanagerpassword === "apple123")
+                {
+                   
+
+                }if(this.state.storemanagerpassword == this.state.storemanager.Password){
                     // sessionStorage.setItem('userData', this.state.user);
-                    alert("Login Success");
+                   // alert("Login Success");
+                    swal("Login Success", "Hi "+this.state.storemanagerusername, "success");
+                    
                     this.setState({success: true});
                 } else{
-                    alert("Password incorect");
+                   // alert("Password  Incorect!!.Please Re-enter");
+                   NotificationManager.error(' Please enter correct password', 'Password incorect');
+                    this.setState({
+                        storemanagerusername : '',
+                        storemanagerpassword : ''
+                    })
                 }
             });
             
@@ -101,35 +97,38 @@ export default class header extends Component{
     render() {
         if(this.state.success) {
             return <Redirect to={'/Product?storenamagerusername='+this.state.storemanagerusername+'&storemanagerid='+this.state.storemanager.smId} />
-        } else if(this.state.register){
-            return <Redirect to={"/Register"} />
         }
-
+         else if(this.state.register){
+            return <Redirect to={"/adminhome"} />
+        }
+         
         // if(sessionStorage.getItem("userData")) {
         //     return <Redirect to={"/viewProduct"} />
         // }
-            
-        const { storemanagerusername,storemanagerpassword} =this.state
+       
+            const { storemanagerusername,storemanagerpassword} =this.state
         return(
-            <div className="container" >
-                <div className="raw">
-                    <div className="rowalign">
+                
+            <div className="" style={{marginLeft: "5%", marginRight: "5%", marginTop: "2%"}}>
+                 <Header/>
+                <div className="row">
+                        <br/>
                         <div className="col-md-6">
-                            <p align="center">
+                            <div  style={{textAlign: "center"}} >
                                 <img src={logo} width="50%" />
-                            </p>
+                            </div >
                             <br />
-                            {/* <img src={back} width="100%"/> */}
+                             <img src={back} width="100%"/>
                         </div>
 
-                        <div className="col-md-5">
+                        <div className="col-md-6">
                             <div className="centeralign">
-                                <br /><br /><br /><br /><br />
+                                <br /><br /><br />
 
                                 <form onSubmit={this.handleLoginSubmit}>
                                     <div className="formalign">
                                         <h1 align="center">
-                                            <i class="fa fa-lock icon"></i> Store Manager Login
+                                            <i class="fa fa-lock icon"></i> Store Manager/Admin Login
                                         </h1>
 
                                         <div className="input-container">
@@ -156,21 +155,21 @@ export default class header extends Component{
                                             required />
                                         </div>
 
-                                        <button type="submit" className="btn1">Login</button>
+                                        <button type="submit" className="btn2">Login</button>
 
                                         <br /><br />
 
                                         <p align="center">
-                                            {/* <a href="reset.html">Lost your password?</a><br/> */}
-                                            <a href="/Register">Don't have an account?</a>
                                         </p>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div>
+                
                 </div>
+                <NotificationContainer/>
             </div>
         )
+
     }
 }

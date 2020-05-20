@@ -2,7 +2,7 @@
 
  /* margin-left: 40%; */
  text-align: center;
-
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .quantitybox{
@@ -169,10 +169,12 @@ margin-top: -.3rem;
 
 .tabletext{
   text-align : center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: medium;
 }
 
 .productlistbuttoncolor{
-  background-color:  #5e35b1 ;
+  background-color:  red;
 }
 
 .navbarcolor{
@@ -192,3 +194,37 @@ margin-top: -.3rem;
   margin-left: 9%;
 }
 
+.icons{
+  margin-left: -6%;
+  margin-bottom: -6%;
+}
+
+.quantitycolor{
+  color: red;
+}
+
+.deletebuttoncolor{
+  background-color: red;
+}
+
+.detailswidth{
+  width: 45%;
+  height: 20%;
+  margin-left: -1%;
+}
+
+.mainwidth{
+  width: 80%;
+  height: 10%;
+  margin-left: 10%;
+ 
+}
+.details{
+  margin-left: -35%;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-top: -1%;
+}
+
+.textbox{
+  margin-left: 5%;
+}
